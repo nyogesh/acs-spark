@@ -27,13 +27,13 @@
 			"type": "securestring",
 			"minLength": 0,
 			"metadata": {
-				"description": "Custom Parameter for Extension - for hello-world, this is empty"
+				"description": "Custom Parameter for Extension - thi is empty"
 			}
 		}
    },
    "variables": {  
 		"singleQuote": "'",
-		"initScriptUrl": "[concat(parameters('artifactsLocation'), 'spark-install/v1/spark_install.sh')]"
+		"initScriptUrl": "[concat(parameters('artifactsLocation'), 'extensions/spark-install/v1/spark_install.sh')]"
    },
    "resources": [  
 	{
