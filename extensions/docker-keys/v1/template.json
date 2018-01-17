@@ -1,0 +1,62 @@
+{
+   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+   "contentVersion": "1.0.0.0",
+   "parameters": {  
+		"artifactsLocation": {
+			"type": "string",
+			"minLength": 1,
+			"metadata": {
+				"description": "Artifacts Location - URL"
+			}
+        },
+		"apiVersionDefault": {
+			"type": "string",
+			"minLength": 1,
+			"metadata": {
+				"description": "Compute API Version"
+			}
+		},
+		"targetVMName":{
+			"type": "string",
+			"minLength": 1,
+			"metadata": {
+				"description": "Name of the vm to run"
+			}
+		},
+		"extensionParameters": {
+			"type": "securestring",
+			"minLength": 1,
+			"metadata": {
+				"description": "Custom Parameter for Extension"
+			}
+		}
+   },
+   "variables": {  
+		"singleQuote": "'",
+		"initScriptUrl": "[concat(parameters('artifactsLocation'), 'extensions/spark-install/v1/spark_install.sh')]"
+   },
+   "resources": [  
+	{
+      "apiVersion": "[parameters('apiVersionDefault')]",
+      "dependsOn": [],
+      "location": "[resourceGroup().location]",
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+	  "name": "[concat(parameters('targetVMName'),'/waitforleader')]",
+      "properties": {
+        "publisher": "Microsoft.OSTCExtensions",
+        "type": "CustomScriptForLinux",
+        "typeHandlerVersion": "1.5",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+			"fileUris": [ 
+			   "[variables('initScriptUrl')]" 
+			 ]
+		},
+        "protectedSettings": {
+			"commandToExecute": "[concat('/bin/bash -c \"/bin/bash ./docker_keys.sh ', variables('singleQuote'), parameters('extensionParameters'), variables('singleQuote'), ' >> /var/log/azure/docker-provision.log 2>&1 &\" &')]"
+        }
+      }
+    }
+	],
+   "outputs": {  }
+}
