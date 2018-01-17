@@ -29,7 +29,14 @@
 			"metadata": {
 				"description": "Custom Parameter for Extension"
 			}
-		}
+		},
+		"dockerrepo":{
+			"type": "string",
+			"minLength": 1,
+			"metadata": {
+				"description": "Docker repo details should be of format '<repo location> <base64encode username:key>'"
+			}
+		},
    },
    "variables": {  
 		"singleQuote": "'",
@@ -53,7 +60,7 @@
 			 ]
 		},
         "protectedSettings": {
-			"commandToExecute": "[concat('/bin/bash -c \"/bin/bash ./docker_keys.sh ', variables('singleQuote'), parameters('extensionParameters'), variables('singleQuote'), ' >> /var/log/azure/docker-provision.log 2>&1 &\" &')]"
+			"commandToExecute": "[concat('/bin/bash -c \"/bin/bash ./docker_keys.sh ', variables('singleQuote'), parameters('dockerrepo'), variables('singleQuote'), ' >> /var/log/docker-provision.log 2>&1 &\" &')]"
         }
       }
     }
