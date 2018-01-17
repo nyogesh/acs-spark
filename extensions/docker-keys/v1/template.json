@@ -33,7 +33,7 @@
    },
    "variables": {  
 		"singleQuote": "'",
-		"initScriptUrl": "[concat(parameters('artifactsLocation'), 'extensions/spark-install/v1/spark_install.sh')]"
+		"initScriptUrl": "[concat(parameters('artifactsLocation'), 'extensions/docker-keys/v1/docker_keys.sh')]"
    },
    "resources": [  
 	{

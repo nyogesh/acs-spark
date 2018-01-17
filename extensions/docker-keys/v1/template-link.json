@@ -12,7 +12,7 @@
     "properties": {
         "mode": "Incremental",
         "templateLink": {
-            "uri": "EXTENSION_URL_REPLACEextensions/spark-install/v1/template.json",
+            "uri": "EXTENSION_URL_REPLACEextensions/docker-keys/v1/template.json",
             "contentVersion": "1.0.0.0"
         },
         "parameters": {
