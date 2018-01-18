@@ -14,7 +14,6 @@ mkdir -p $TARGETDIR/$DOCKERDIR
 echo $(date) " - Generating the docker config.json"
 
 cat >$TARGETDIR/$DOCKERDIR/config.json <<EOF
-
 {
         "auths": {
                 "$REPO": {
